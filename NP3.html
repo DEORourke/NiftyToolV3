@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<head>
+
+<title>Nifty Tool v3</title>
+<meta content="text/html; charset=utf-8">
+
+<link rel="stylesheet" href="script/styles.css">
+<script src="script/papaparse.min.js"></script>
+<script src="script/emailtemplates.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="script/findStoreInfo.js"></script>
+
+</head>
+
+<body>
+<div class="header">
+	<img id="logo" src="graphic/NiftyTool.png" onclick="pass()"/><br/>
+	<div class="buttons">
+		<input type="text" id="storeNum" maxlength=14 tabindex="3">
+		<img class="historyIcon" src="graphic/clock.png" onclick="recallHistory()">
+		<div id="history">
+			Store lookup history : 
+			<span class="historyBanner"></span>
+			<a onclick='recallHistory()'><b>close</b></a>	
+		</div>
+		<br>
+		<button id="getInfo" onclick="grepData($('#storeNum').val().trim())">Retrieve Store Info</button>
+		<button id="emailTemplates" onclick="togglePopInSections(this.id)">Show <u>Q</u>uick Emails</button>
+		<button id="labLinks" onclick="toggleSections(this.id)">Show <u>L</u>ab PCs</button>
+		<span id="breakPoint"></span>
+		<button id="quickLinks" onclick="toggleSections(this.id)">Show L<u>i</u>nks</button>
+		<button id="phoneList" onclick="togglePopInSections(this.id)">Show <u>P</u>hone List</button>
+		<button onclick="writeListStores()">List Stores B<u>y</u>...</button>
+		<button onclick="writeMassConnect()"><u>M</u>ass Connect</button>
+		<button onclick="magicMISCfunction()">Magic Button</button>
+		
+	</div>
+	<input type="checkbox" id="remote" tabindex="4"><label for="remote">Launch Remote Immediately</label>
+	<div class="immediateConnectOptions">
+		<input type="radio" name="immediateConnectOptions" id="PC" value="MFS1" checked><label for="PC">PC</label>
+		<input type="radio" name="immediateConnectOptions" id="MIO" value="MIO_PC"><label for="MIO">MIO</label>
+	</div>
+	<div class="update">
+		<a href="file:///X:\NP3\NiftyInfoUpdate.xlsm"><button id="updateButton"><u>U</u>pdate Info</button></a>
+	</div>
+</div>
+
+<div class="storeValues">
+<span id="storeCPOld"></span>
+<span id="urlException"></span>
+<span id="hasIntouch"></span>
+</div>
+
+<div class="centerDivs" style="position:relative;">
+
+<div class="phoneList">
+	<button id='retailSupportListButton' class='phoneListButton' onclick='changePhoneList(this.id)'>Retail Support</button>
+	<button id='CompanyContactsListButton' class='phoneListButton' onclick='changePhoneList(this.id)'>Company Contats</button>
+	<button id='vendorContactsListButton' class='phoneListButton' onclick='changePhoneList(this.id)'>Vendor Contacts</button>
+	
+	<table id="phoneHeader"></table>
+	
+	<div id="retailSupportContainer" class="phoneTable">
+		<table id="RetailSupportTable"></table>
+	</div>
+	
+	<div id="CompanyContactsContainer" class="phoneTable">
+		<table id="CompanyContactsTable"></table>
+	</div>
+	
+	<div id="vendorContactsContainer" class="phoneTable">
+		<table id="vendorContactsTable"></table>
+	</div>
+</div>
+
+<div class="popOut">
+	<div class="popOutHeader">
+		<span id="popOutTitle"></span>
+		<img src="graphic/close.png" onclick="clearEmail()">
+	</div>
+	<div class="popOutBody"></div>
+</div>
+
+<div class="emailTemplates">
+<p onclick="writeEmail(15)"><img src="graphic/mail.png"> CallTags</p>
+<p onclick="writeEmail(1)"><img src="graphic/mail.png"> CP Info Update</p>
+<p onclick="writeEmail(2)"><img src="graphic/mail.png"> DUD Equipment</p>
+<p onclick="writeEmail(3)"><img src="graphic/mail.png"> Email Store</p>
+<p onclick="writeEmail(14)"><img src="graphic/mail.png"> Lab Computer Callout</p>
+<p onclick="writeEmail(4)"><img src="graphic/mail.png"> MicroTrax Password Reset</p>
+<p onclick="writeEmail(5)"><img src="graphic/mail.png"> Order Parts</p>
+<p onclick="writeEmail(6)"><img src="graphic/mail.png"> Request Network Cable Maintenance</p>
+<p onclick="writeEmail(7)"><img src="graphic/mail.png"> Request New Timeclock</p>
+<p onclick="writeEmail(8)"><img src="graphic/mail.png"> Request Scale Calibration</p>
+<p onclick="writeEmail(9)"><img src="graphic/mail.png"> Reset Counters</p>
+<p onclick="writeEmail(12)"><img src="graphic/mail.png"> Scanback Eligibility Inquiry</p>
+<p onclick="writeEmail(13)"><img src="graphic/mail.png"> Server Swap Notification</p>
+<!-- Email templates no longer needed -->
+<!-- <p onclick="writeEmail(10)"><img src="graphic/mail.png"> SBO Install - Completion</p> -->
+<!-- <p onclick="writeEmail(11)"><img src="graphic/mail.png"> SBO Install - Script Change</p> -->
+</div>
+
+</div>
+
+<div class="infoTable">
+<div class="infoTableMain">
+<table>
+	<tr>
+		<td class="FrstCol dataHeader storeHeader" id="number">Company - <strong><span id="storeNumber"></span></strong> ( <span id="storeOrical"></span> ) <span id="retailer"></span><!-- <img class="icon" onclick="pingAllDevices()" src="graphic/ping.png"> --></td>
+		<td class="MidCol dataHeader"> Router <img class="icon" onclick="pingDevice('#router')" src="graphic/ping.png"></td>
+		<td class="MidCol dataHeader"> MFS1 <img class="icon" onclick="pingDevice('#MFS1')" src="graphic/ping.png"></td>
+		<td class="MidCol dataHeader"> SW2 <img class="icon" onclick="pingDevice('#switch_2')" src="graphic/ping.png"></td>
+		<td class="MidCol dataHeader"> CP User </td>
+		<td class="LastCol dataHeader"> POS Type <img class="icon" src="graphic/camera.png" onclick="showWiringGraphic('#laneinfo')"></td>
+		<td class="LastCol dataHeader"> Region </td>
+	</tr>
+	<tr>
+		<td class="dataInfo"><span id="phone" onclick="dialOut(this.id)"></span><span id="HDPilot"></span></td>
+		<td class="dataInfo" id="router"></td>
+		<td class="dataInfo lnk" id="MFS1" onclick="remoteConnect($('#'+this.id).text(), this.id)"></td>
+		<td class="dataInfo" id="switch_2"></td>
+		<td class="dataInfo" id="cpuser"></td>
+		<td class="dataInfo" id="laneinfo"><span id="numLanes"></span> <span id="versionLanes"></span> <span id="makeLanes"></span></td>
+		<td class="dataInfo" id="region"></td>
+	</tr>
+	<tr>
+		<td rowspan="2" class="dataInfo"> <span id="hours"></span><br /><span id="sunHours"></span></td>
+		<td class="dataHeader"> Access Point <img class="icon" onclick="pingDevice('#access_point')" src="graphic/ping.png"></td>
+		<td class="dataHeader"> Safe <img class="icon"  onclick="pingDevice('#safe')" src="graphic/ping.png"></td>
+		<td class="dataHeader"> Meat Scale <img class="icon" onclick="pingDevice('#meat_scale')" src="graphic/ping.png"></td>
+		<td class="dataHeader"> CP Company </td>
+		<td class="dataHeader"> Router Model <img class="icon" onclick="showWiringGraphic('#routermodel')" src="graphic/camera.png"></td>
+		<td class="dataHeader"> Distribution Center </td>
+	</tr>
+	<tr>
+		<td class="dataInfo" id="access_point"></td>
+		<td class="dataInfo" id="safe"></td>
+		<td class="dataInfo" id="meat_scale" onclick="launchVNC($('#'+this.id).text(), this.id)"></td>
+		<td class="dataInfo" id="cpcompany"></td>
+		<td class="dataInfo" id="routermodel"></td>
+		<td class="dataInfo" id="dc"></td>
+	</tr>
+	<tr>
+		<td rowspan="2" class="dataInfo" id="address1"><span id="storeAddress"></span><br /><span id="storeCity"></span><span id="storeState"></span> <span id="storeZip"></span></td>
+		<td class="dataHeader"> Mio PC <img class="icon" onclick="pingDevice('#MIO_PC')" src="graphic/ping.png"></td>
+		<td class="dataHeader"> Time Clock <img class="icon" onclick="pingDevice('#time_clock')" src="graphic/ping.png"></td>
+		<td class="dataHeader"> Produce Scale <img class="icon" onclick="pingDevice('#produce_scale')" src="graphic/ping.png"></td>
+		<td class="dataHeader"> CP Pass </td>
+		<td class="dataHeader"> AP Model </td>
+		<td class="dataHeader"> Broadband </td>
+	</tr>
+	<tr>
+		<td class="dataInfo" id="MIO_PC" onclick="remoteConnect($('#'+this.id).text(), this.id)"></td>
+		<td class="dataInfo" id="time_clock" onclick="launchVNC($('#'+this.id).text(), this.id)"></td>
+		<td class="dataInfo" id="produce_scale" onclick="launchVNC($('#'+this.id).text(), this.id)"></td>
+		<td class="dataInfo" id="cppass"></td>
+		<td class="dataInfo" id="apModel"></td>
+		<td class="dataInfo" id="broadband"></td>
+	</tr>
+</table>
+<button id="remoteOptions" onclick="toggleSections(this.id)">Show Remote / Ping Options</button>
+<button onclick="storeWebPage()">Store Web Page</button>
+ &nbsp; &nbsp; <img src="graphic/eyeClosed.png" onclick='hideStoreInfo()'>
+</div>
+
+<div class="remoteOptions">
+	<div class="connectOptions">
+		Connect to :<br />
+		<input type='radio' name='connectOption' value=0 id='connectOption0' checked /><label for='connectOption0'> &nbsp; &nbsp; Dashboard</label><br />
+		<input type='radio' name='connectOption' value=1 id='connectOption1' /><label for='connectOption1'> &nbsp; &nbsp; Remote Control</label><br />
+		<input type='radio' name='connectOption' value=2 id='connectOption2' /><label for='connectOption2'> &nbsp; &nbsp; File Transfer</label><br />
+		<input type='radio' name='connectOption' value=3 id='connectOption3' /><label for='connectOption3'> &nbsp; &nbsp; Command Prompt</label><br />
+		<input type='radio' name='connectOption' value=4 id='connectOption4' /><label for='connectOption4'> &nbsp; &nbsp; Event Viewer</label><br />
+	</div>
+	<div class="pingOptions">
+		Ping Options:<br />
+		<input type='radio' name='pingOption' value=0 id='pingOption0' checked /><label for='pingOption0'> &nbsp; &nbsp; Normal Ping</label><br />
+		<input type='radio' name='pingOption' value=1 id='pingOption1' /><label for='pingOption1'> &nbsp; &nbsp; Infinite Ping</label><br />
+		<input type='radio' name='pingOption' value=2 id='pingOption2' /><label for='pingOption2'> &nbsp; &nbsp; Log Ping Test</label><br />
+		<br />
+		<input type='checkbox' name='pingSize' value=1 id='pingSize' /><label for='pingSize'> &nbsp; &nbsp; Use large packets</label><br />
+	</div>
+</div>
+</div>
+
+<div class="labLinks">
+	<span class="labLinksCheckbox">
+		<input id="labLinksCheckbox" type="checkbox"><label for="labLinksCheckbox">send email</label>
+	</span>
+	<div class="labLinkAddresses" id="labLinkAddresses"></div>
+</div>
+
+<div class="quickLinks" id="quickLinksContainer">
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,539 @@
+
+/*	Styles for the top of the document	*/
+.header {
+	color: rgb(245, 245, 250);
+	/* background-color: rgb(25, 25, 50); */
+	background-color: rgb(30, 55, 0);
+	padding: 20px;
+	border-radius: 8px;
+	background-image: url("../graphic/SAL-tb-newlogo2.png");
+	background-repeat: no-repeat;
+	background-size: 120px 120px;
+	background-position: right 10px top 10px;
+}
+.header #logo {
+	width: auto;
+	height: 20px;
+}
+.header .buttons {
+	margin-top: 15px;
+	margin-bottom: 2px;
+}
+.header input[type=text]:focus {
+	border: 4px solid ##E1E1E1;
+}
+.header input[type=text] {
+	width: 130px;
+	margin-bottom: 5px;
+}
+.header button {
+	width: 135px;	/* previously 137px	*/
+	height: 35px;
+	margin-right: 18px;	/* previously 30px	*/
+	border-radius: 5px;
+/* 	white-space: normal;
+	word-wrap: break-word; */
+}
+.header label {
+	font-style: italic;
+	padding-right: 10px;
+}
+.header .update {
+	position: absolute;
+	right: 12px;
+	top: 145px;
+}
+.header .update button {
+	height: 22px;
+	width: 90px;
+}
+.header #history {
+	display: inline;
+	background-color: rgba(255,255,255,.8);
+	border-radius: 5px;
+	padding: 7px;
+	color: black;
+	
+	transform: translate(5px, -10px);
+	box-shadow: 3px 3px 5px #fefefe;
+}
+.header .historyLink {
+	color: #0645AD;
+}
+.header .historyLink:hover {
+	cursor: pointer;
+	font: bold;
+}
+.header .historyIcon {
+	transform: translate(-3px, 5px);
+}
+.header .immediateConnectOptions {
+	display: inline;
+}
+
+/*	styles for the hidden info element	*/
+.storeValues {
+	position: absolute;
+	visibility: hidden;
+}
+
+/*	Styles for the store info table	*/
+.infoTable {
+	background-color: rgba(225, 225, 225, 1);
+	padding: 10px;
+	border-radius: 8px;
+	height: 175px;
+}
+.infoTable .infoTableMain {
+	z-index: 2;
+	position: absolute;
+}
+.infoTable button {
+	padding-right: 10px;
+}
+.infoTable label {
+	font-style: italic;
+}
+.infoTable .FrstCol {
+	min-width: 300px;
+}
+.infoTable .MidCol {
+	min-width: 125px;
+}
+.infoTable .LastCol {
+	min-width: 150px;
+}
+.infoTable table {
+	border: 1px solid black;
+}
+.infoTable .dataHeader {
+	background-color: rgba(150, 150, 200, 0.8);
+	border-radius: 5px;
+	padding: 2px;
+}
+.infoTable .icon {
+	padding: 2px;
+	border-radius: 6px;
+	cursor: pointer;
+	float: right;
+}
+.infoTable .lnk {
+	cursor: pointer;
+	text-decoration: underline;
+	color: blue;
+}
+.infoTable .storeHeader {
+	text-align: center;
+	font: bold;
+}
+.infoTable .remoteOptions {
+	border-radius: 5px;
+	background-color: rgb(150, 150, 200);
+	padding: 25px 0px 10px 0px;
+	width: 431px;
+	position: absolute;
+	transform: translate(1px, 150px);
+	border: 1px solid black;
+	z-index: 1;
+}
+.infoTable .remoteOptions div {
+	display: inline-block;
+	justify-content: center;
+	width: 47%;
+	margin-left: 10px;	
+	vertical-align: top;
+}
+.infoTable #HDPilot {
+	float: right;
+	font-size: .7em;
+}
+.infoTable #retailer {
+	font-size: .7em
+}
+.infoTable .connectOptions {
+	border-right: 1px solid black
+}
+.infoTable td{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 250px;
+}
+.infoTable .addressField {
+	rowspan: 2;
+}
+
+/*	styles for the lab links table	*/
+.labLinks {
+	background-image: linear-gradient(to bottom right, #DDD3D3, #FFF1F1);
+	padding: 10px;
+	padding-top: 18px;
+	border-radius: 8px;
+	z-index: auto;
+}
+.labLinks img {
+	transform: translate(-27px,-12px);
+	position: absolute;
+	opacity: 0.99;
+}
+.labLinks a {
+	/* margin: 35px; */
+	cursor: pointer;
+	font-weight: bold;
+}
+.labLinks a:link {
+	 text-decoration: none;
+}
+.labLinks .labLinkAddresses {
+	display: inline-block;
+	text-align: center;
+	width: 90%;
+}
+.labLinkAddresses span {
+	background-image: url("../graphic/RAlogo.png");
+	background-repeat: no-repeat;
+	background-color: #F0F0F0;
+	white-space: nowrap;
+	border-radius: 5px;
+	border: 1px solid #707070;
+	display: inline-block;
+	background-position-x: right 2px;
+	background-position-y: 2px;
+	margin-left: 20px;
+	padding: 10px 35px 5px 5px;
+	box-shadow: 0px 0px 5px 2px #696969;
+	
+}
+.labLinkAddresses span:active {
+	box-shadow: inset 0px 0px 0px 1px #696969;
+
+}
+
+/*	Styles for quick links tables	*/
+.quickLinks {
+	padding: 10px;
+	border-radius: 8px;
+	background-color: rgba(255, 240, 240, 0.9);
+}
+.quickLinks .row {
+	display: flex;
+	justify-content: center;
+	height: 135px;
+}
+.quickLinks .cell {
+	width: 150px;
+	margin: 5px;
+}
+.quickLinks img {
+	border-radius: 20px;
+	display: block;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.quickLinks a:link {
+	 text-decoration: none;
+}
+.quickLinks P {
+	color: rgb(0, 50, 205);
+	font-size: 1.125em;
+	margin-top: 5px;
+	text-align: center;
+}
+.quickLinks B {
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 1.187em;
+}
+.quickLinks .subtitle {
+	font-size: .75em;
+}
+
+/*	styles for the phone list table	*/
+.phoneList {
+	/* height: 700px; */
+	max-height: 650px;
+	min-height: 175px;
+	width: 700px;
+	background-color: rgba(255, 250, 205, 0.9);
+	border-radius: 10px;
+	position: fixed;
+	z-index: 4;
+	right: 0;
+	padding: 10px;
+	overflow: hidden;
+	box-shadow: 0px 3px 7px #050505;
+}
+.phoneTable {
+	height: 615px;
+	max-height: 615px;
+	min-height: 140px;
+	/* z-index: 3; */
+	padding-top: 2px;
+	overflow: scroll;
+}
+.phoneList th {
+	text-align: left;
+	padding-top: 10px;
+}
+.phoneList td {
+	vertical-align: bottom;
+}
+.phoneList .col1 {
+	width: 185px;
+
+}
+.phoneList .col2 {
+	width: 14px;
+
+}
+.phoneList .col3H {
+	width: 100px;
+	text-align: Center;
+
+}
+.phoneList .col3 {
+	width: 100px;
+	text-align: right;
+
+}
+.phoneList .col4 {
+	max-width: 250px;
+	width: 250px;
+	word-wrap: break-word;
+	padding-left: 8px;
+}
+.phoneList .link {
+	cursor: pointer;
+	text-decoration: underline;
+	font-size: .9em;
+	color: blue;
+}
+.phoneList .oddRow {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.phoneList .phoneButtonClicked {
+	border: 2px solid rgba(30, 30, 75, .8);
+	background-color: rgb(250, 250, 250);
+	border-radius: 5px;
+}
+.phoneList .noteIndicator {
+	float: right;
+	justify-content: right;
+	vertical-align: top;
+	transform: translate(2px, -3px);
+}
+.phoneList .noteText{
+	visibility: hidden;
+	border: 2px solid rgba(30, 30, 75, .8);
+	background-color: rgb(250, 250, 250);
+	border-radius: 5px;
+	padding: 5px;
+	position: absolute;
+	z-index: 5
+}
+
+/*	styles for the email templates table	*/
+.emailTemplates {
+	height: 485px;
+	max-height: 485px;
+	min-height: 175px;
+	width: 300px;
+	background-color: rgba(245, 220, 180, 0.9);
+	border-radius: 10px;
+	position: fixed;
+	z-index: 3;
+	left: 0;
+	overflow: scroll;
+	-ms-overflow-style: none;
+	box-shadow: 3px 3px 7px #050505;
+}
+.emailTemplates span {
+	font-size: 0.625em;
+}
+.emailTemplates p {
+	margin: 10px;
+	cursor: pointer;
+}
+.emailTemplates img {
+	transform: translate(0px, 3px);
+}
+
+/*	styles for the email information pop-out section	*/
+.popOut {
+	width:	661px;
+	max-height: 642px;
+	margin: auto;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	background-color: rgba(180, 230, 255, 0.9);
+	position: fixed;
+	border-radius: 8px;
+	box-shadow: 3px 3px 7px #050505;
+}
+.popOut textarea {
+	resize: none;
+}
+.popOut .popOutHeader {
+	height: 20px;
+	background-color: #006699;
+	padding: 5px 5px 5px 15px;
+	border-radius: 6px;
+	font-size: 1.25em;
+	color: ghostwhite;
+	font-weight: bold;
+	cursor: move;
+}
+.popOut .popOutHeader img {
+	float: right;
+	border-radius: 3px;
+	cursor: default;
+}
+.popOut .popOutBody {
+	padding: 6px;
+}
+
+/*	styles for the DUD Equipment template	*/
+.popOut .addSubButtons img {
+	float: right;
+	display: inline;
+	border-radius: 3px;
+	padding-left: 8px;
+}
+.popOut .addSubButtons {
+	display: inline;
+}
+.popOut .DUDRow {
+	margin-top: 5px;
+}
+.popOut #DUDLeft {
+	width: 150px;
+	height: 50px;
+}
+.popOut #DUDLeft input {
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+.popOut .DUDBody {
+	display: inline-block;
+	vertical-align: top
+}
+
+/*	styles for the order parts email template	*/
+.popOut .partText {
+	display: inline-block;
+	width: 50%;
+}
+.popOut .partType {
+	margin-top: 10px;
+	font-weight: bold;
+	background-color: #7CF
+}
+.popOut .partSubType {
+	font-weight: bold;
+	transform: translate(0px ,8px);
+	font-size: 0.8em;
+	margin-left: 80px;
+}
+.popOut .popOutParts {
+	height: 450px;
+	width: 642px;
+	overflow: hidden;
+	border: 1px solid black;
+}
+.popOut .partHeader {
+	background-color: LightGrey;
+	border-radius: 5px;
+	padding: 5px;
+	outline: 1px solid Grey;
+	height: 12px;
+}
+.popOut .partsContainer {
+	height: 380px;
+	width: 645px;
+	overflow: hidden;
+}
+.popOut .partsList {	
+/*	height: 247px;	*/
+	height: 397px;
+	width: 666px;
+	overflow: scroll;
+}
+.popOut .part {
+	display: inline-block;
+	vertical-align: top;
+	width: 47%;
+	font-size: 0.8em;
+}
+.popOut .isHouchense {
+	padding-left: 19px;
+}
+
+/*	styles for the pop-out section for store list	*/
+.popOut .listStoresContainer {
+	overflow: hidden;
+	height: 430px;
+	width: 645px;
+}
+.popOut .listStores {
+	overflow: scroll;
+	height: 410px;
+	width: 640px;
+}
+.popOut .listStoresOptions {
+	padding: 5px 5px 5px 5px;
+	height: 23px;
+}
+/* .popOut .listStoresOptions button{
+	float: right;
+	width: 85px;
+} */
+.popOut .storesColNarrow {
+	width: 55px;
+	white-space: nowrap;
+}
+.popOut .storesColNarrowLnk1 {
+	width: 55px;
+	cursor: pointer;
+	text-decoration: underline;
+	color: blue;
+}
+.popOut .storesColWide {
+	width: 140px;
+}
+.popOut .storesColWideLnk1, .storesColWideLnk2 {
+	width: 140px;
+	cursor: pointer;
+	text-decoration: underline;
+	color: blue;
+}
+.popOut .listByOption {
+	width: 130px;
+}
+.popOut .listStoresButton {
+	float : right;
+	/* margin-right : 30px; */
+	/* width: 85px; */
+}
+.popOut .listStoresButton button {
+	width: 85px;
+}
+
+/*	styles specific to the mass remote connection feature	*/
+.popOut .massConnect {
+	display: inline-block;
+	justify-content: center;
+	width: 47%;
+	margin-left: 10px;	
+	vertical-align: top;	
+}
+.popOut .massConnect label {
+	font-style: italic;
+}
+.popOut .massConnect p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-bottom: solid black thin;
+}
